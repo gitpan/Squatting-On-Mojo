@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use CGI::Cookie;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 our %p;
 
 $p{e} = sub {
@@ -57,10 +57,10 @@ sub mojo {
   for my $header (keys %$ch) {
     if (ref $ch->{$header} eq 'ARRAY') {
       for my $item (@{ $ch->{$header} }) {
-        $h->add_line($header => $item);
+        $h->add($header => $item);
       }
     } else {
-      $h->add_line($header => $ch->{$header});
+      $h->add($header => $ch->{$header});
     }
   }
   $tx->res->code($cc->status);
